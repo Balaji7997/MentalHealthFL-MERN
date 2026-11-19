@@ -1,0 +1,761 @@
+{
+  "experiment": "federated_fedavg_roberta_lora",
+  "dataset": "Dreaddit (5 Natural Non-IID Domain Clients)",
+  "base_model": "FacebookAI/roberta-base",
+  "aggregation_algorithm": "FedAvg (Sample-Weighted Parameter Averaging on Trainable LoRA + Classifier)",
+  "device": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "total_runtime_seconds": 166.31,
+  "hyperparameters": {
+    "seed": 42,
+    "num_clients": 5,
+    "num_rounds": 5,
+    "local_epochs": 1,
+    "batch_size": 16,
+    "max_length": 256,
+    "learning_rate": 0.0002,
+    "weight_decay": 0.01,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.1,
+    "lora_target_modules": [
+      "query",
+      "key",
+      "value"
+    ],
+    "bfloat16": true
+  },
+  "communication_efficiency": {
+    "shared_tensors_per_round": 76,
+    "shared_parameters_per_round": 1034498,
+    "upload_size_per_client_mb": 3.9463,
+    "total_upload_all_rounds_mb": 98.6575
+  },
+  "best_round": 5,
+  "rounds_history": [
+    {
+      "round": 1,
+      "aggregation_weights": {
+        "client_1": 0.1928,
+        "client_2": 0.1973,
+        "client_3": 0.2097,
+        "client_4": 0.207,
+        "client_5": 0.1933
+      },
+      "clients": [
+        {
+          "client_id": "client_1",
+          "domain": "abuse",
+          "num_train_samples": 435,
+          "local_train_loss": 0.688,
+          "local_val_accuracy": 0.5259,
+          "local_val_f1": 0.6893,
+          "train_seconds": 5.37
+        },
+        {
+          "client_id": "client_2",
+          "domain": "anxiety",
+          "num_train_samples": 445,
+          "local_train_loss": 0.6575,
+          "local_val_accuracy": 0.6441,
+          "local_val_f1": 0.7835,
+          "train_seconds": 5.01
+        },
+        {
+          "client_id": "client_3",
+          "domain": "financial",
+          "num_train_samples": 473,
+          "local_train_loss": 0.6831,
+          "local_val_accuracy": 0.596,
+          "local_val_f1": 0.0,
+          "train_seconds": 5.27
+        },
+        {
+          "client_id": "client_4",
+          "domain": "ptsd",
+          "num_train_samples": 467,
+          "local_train_loss": 0.6874,
+          "local_val_accuracy": 0.6957,
+          "local_val_f1": 0.7904,
+          "train_seconds": 5.38
+        },
+        {
+          "client_id": "client_5",
+          "domain": "social",
+          "num_train_samples": 436,
+          "local_train_loss": 0.7031,
+          "local_val_accuracy": 0.5862,
+          "local_val_f1": 0.1724,
+          "train_seconds": 5.09
+        }
+      ],
+      "global_val_metrics": {
+        "loss": 0.6701,
+        "accuracy": 0.5851,
+        "precision": 0.5585,
+        "recall": 1.0,
+        "f1": 0.7167,
+        "confusion_matrix": [
+          [
+            34,
+            234
+          ],
+          [
+            0,
+            296
+          ]
+        ]
+      },
+      "global_model_on_clients_val": {
+        "client_1": {
+          "domain": "abuse",
+          "loss": 0.6727,
+          "accuracy": 0.5776,
+          "precision": 0.5545,
+          "recall": 1.0,
+          "f1": 0.7135
+        },
+        "client_2": {
+          "domain": "anxiety",
+          "loss": 0.653,
+          "accuracy": 0.7034,
+          "precision": 0.6847,
+          "recall": 1.0,
+          "f1": 0.8128
+        },
+        "client_3": {
+          "domain": "financial",
+          "loss": 0.6795,
+          "accuracy": 0.4949,
+          "precision": 0.4444,
+          "recall": 1.0,
+          "f1": 0.6154
+        },
+        "client_4": {
+          "domain": "ptsd",
+          "loss": 0.6653,
+          "accuracy": 0.6174,
+          "precision": 0.6,
+          "recall": 1.0,
+          "f1": 0.75
+        },
+        "client_5": {
+          "domain": "social",
+          "loss": 0.6815,
+          "accuracy": 0.5172,
+          "precision": 0.4862,
+          "recall": 1.0,
+          "f1": 0.6543
+        }
+      },
+      "round_seconds": 30.72
+    },
+    {
+      "round": 2,
+      "aggregation_weights": {
+        "client_1": 0.1928,
+        "client_2": 0.1973,
+        "client_3": 0.2097,
+        "client_4": 0.207,
+        "client_5": 0.1933
+      },
+      "clients": [
+        {
+          "client_id": "client_1",
+          "domain": "abuse",
+          "num_train_samples": 435,
+          "local_train_loss": 0.6397,
+          "local_val_accuracy": 0.7414,
+          "local_val_f1": 0.7945,
+          "train_seconds": 5.04
+        },
+        {
+          "client_id": "client_2",
+          "domain": "anxiety",
+          "num_train_samples": 445,
+          "local_train_loss": 0.6294,
+          "local_val_accuracy": 0.6949,
+          "local_val_f1": 0.8085,
+          "train_seconds": 5.13
+        },
+        {
+          "client_id": "client_3",
+          "domain": "financial",
+          "num_train_samples": 473,
+          "local_train_loss": 0.6104,
+          "local_val_accuracy": 0.8283,
+          "local_val_f1": 0.7952,
+          "train_seconds": 5.35
+        },
+        {
+          "client_id": "client_4",
+          "domain": "ptsd",
+          "num_train_samples": 467,
+          "local_train_loss": 0.6357,
+          "local_val_accuracy": 0.7913,
+          "local_val_f1": 0.8261,
+          "train_seconds": 5.37
+        },
+        {
+          "client_id": "client_5",
+          "domain": "social",
+          "num_train_samples": 436,
+          "local_train_loss": 0.6746,
+          "local_val_accuracy": 0.819,
+          "local_val_f1": 0.8142,
+          "train_seconds": 5.05
+        }
+      ],
+      "global_val_metrics": {
+        "loss": 0.5457,
+        "accuracy": 0.805,
+        "precision": 0.7514,
+        "recall": 0.9392,
+        "f1": 0.8348,
+        "confusion_matrix": [
+          [
+            176,
+            92
+          ],
+          [
+            18,
+            278
+          ]
+        ]
+      },
+      "global_model_on_clients_val": {
+        "client_1": {
+          "domain": "abuse",
+          "loss": 0.5632,
+          "accuracy": 0.7845,
+          "precision": 0.7368,
+          "recall": 0.918,
+          "f1": 0.8175
+        },
+        "client_2": {
+          "domain": "anxiety",
+          "loss": 0.5055,
+          "accuracy": 0.8729,
+          "precision": 0.8427,
+          "recall": 0.9868,
+          "f1": 0.9091
+        },
+        "client_3": {
+          "domain": "financial",
+          "loss": 0.5437,
+          "accuracy": 0.7576,
+          "precision": 0.6429,
+          "recall": 0.9,
+          "f1": 0.75
+        },
+        "client_4": {
+          "domain": "ptsd",
+          "loss": 0.5448,
+          "accuracy": 0.7913,
+          "precision": 0.7386,
+          "recall": 0.9848,
+          "f1": 0.8442
+        },
+        "client_5": {
+          "domain": "social",
+          "loss": 0.5716,
+          "accuracy": 0.8103,
+          "precision": 0.7541,
+          "recall": 0.8679,
+          "f1": 0.807
+        }
+      },
+      "round_seconds": 30.55
+    },
+    {
+      "round": 3,
+      "aggregation_weights": {
+        "client_1": 0.1928,
+        "client_2": 0.1973,
+        "client_3": 0.2097,
+        "client_4": 0.207,
+        "client_5": 0.1933
+      },
+      "clients": [
+        {
+          "client_id": "client_1",
+          "domain": "abuse",
+          "num_train_samples": 435,
+          "local_train_loss": 0.4976,
+          "local_val_accuracy": 0.7672,
+          "local_val_f1": 0.8085,
+          "train_seconds": 5.06
+        },
+        {
+          "client_id": "client_2",
+          "domain": "anxiety",
+          "num_train_samples": 445,
+          "local_train_loss": 0.4293,
+          "local_val_accuracy": 0.8644,
+          "local_val_f1": 0.8987,
+          "train_seconds": 5.15
+        },
+        {
+          "client_id": "client_3",
+          "domain": "financial",
+          "num_train_samples": 473,
+          "local_train_loss": 0.4489,
+          "local_val_accuracy": 0.8081,
+          "local_val_f1": 0.8,
+          "train_seconds": 5.37
+        },
+        {
+          "client_id": "client_4",
+          "domain": "ptsd",
+          "num_train_samples": 467,
+          "local_train_loss": 0.5045,
+          "local_val_accuracy": 0.7652,
+          "local_val_f1": 0.828,
+          "train_seconds": 5.39
+        },
+        {
+          "client_id": "client_5",
+          "domain": "social",
+          "num_train_samples": 436,
+          "local_train_loss": 0.5163,
+          "local_val_accuracy": 0.7759,
+          "local_val_f1": 0.7797,
+          "train_seconds": 5.05
+        }
+      ],
+      "global_val_metrics": {
+        "loss": 0.4916,
+        "accuracy": 0.8121,
+        "precision": 0.7527,
+        "recall": 0.9561,
+        "f1": 0.8423,
+        "confusion_matrix": [
+          [
+            175,
+            93
+          ],
+          [
+            13,
+            283
+          ]
+        ]
+      },
+      "global_model_on_clients_val": {
+        "client_1": {
+          "domain": "abuse",
+          "loss": 0.5602,
+          "accuracy": 0.7672,
+          "precision": 0.7125,
+          "recall": 0.9344,
+          "f1": 0.8085
+        },
+        "client_2": {
+          "domain": "anxiety",
+          "loss": 0.3602,
+          "accuracy": 0.8729,
+          "precision": 0.8588,
+          "recall": 0.9605,
+          "f1": 0.9068
+        },
+        "client_3": {
+          "domain": "financial",
+          "loss": 0.3949,
+          "accuracy": 0.8283,
+          "precision": 0.717,
+          "recall": 0.95,
+          "f1": 0.8172
+        },
+        "client_4": {
+          "domain": "ptsd",
+          "loss": 0.5585,
+          "accuracy": 0.7913,
+          "precision": 0.7386,
+          "recall": 0.9848,
+          "f1": 0.8442
+        },
+        "client_5": {
+          "domain": "social",
+          "loss": 0.5729,
+          "accuracy": 0.8017,
+          "precision": 0.7143,
+          "recall": 0.9434,
+          "f1": 0.813
+        }
+      },
+      "round_seconds": 30.62
+    },
+    {
+      "round": 4,
+      "aggregation_weights": {
+        "client_1": 0.1928,
+        "client_2": 0.1973,
+        "client_3": 0.2097,
+        "client_4": 0.207,
+        "client_5": 0.1933
+      },
+      "clients": [
+        {
+          "client_id": "client_1",
+          "domain": "abuse",
+          "num_train_samples": 435,
+          "local_train_loss": 0.4436,
+          "local_val_accuracy": 0.7586,
+          "local_val_f1": 0.7879,
+          "train_seconds": 5.07
+        },
+        {
+          "client_id": "client_2",
+          "domain": "anxiety",
+          "num_train_samples": 445,
+          "local_train_loss": 0.3709,
+          "local_val_accuracy": 0.8898,
+          "local_val_f1": 0.9161,
+          "train_seconds": 5.17
+        },
+        {
+          "client_id": "client_3",
+          "domain": "financial",
+          "num_train_samples": 473,
+          "local_train_loss": 0.3597,
+          "local_val_accuracy": 0.8586,
+          "local_val_f1": 0.8409,
+          "train_seconds": 5.41
+        },
+        {
+          "client_id": "client_4",
+          "domain": "ptsd",
+          "num_train_samples": 467,
+          "local_train_loss": 0.4094,
+          "local_val_accuracy": 0.8522,
+          "local_val_f1": 0.8759,
+          "train_seconds": 5.42
+        },
+        {
+          "client_id": "client_5",
+          "domain": "social",
+          "num_train_samples": 436,
+          "local_train_loss": 0.4672,
+          "local_val_accuracy": 0.7672,
+          "local_val_f1": 0.7429,
+          "train_seconds": 5.08
+        }
+      ],
+      "global_val_metrics": {
+        "loss": 0.3983,
+        "accuracy": 0.8316,
+        "precision": 0.8,
+        "recall": 0.9054,
+        "f1": 0.8494,
+        "confusion_matrix": [
+          [
+            201,
+            67
+          ],
+          [
+            28,
+            268
+          ]
+        ]
+      },
+      "global_model_on_clients_val": {
+        "client_1": {
+          "domain": "abuse",
+          "loss": 0.4755,
+          "accuracy": 0.7586,
+          "precision": 0.726,
+          "recall": 0.8689,
+          "f1": 0.791
+        },
+        "client_2": {
+          "domain": "anxiety",
+          "loss": 0.2902,
+          "accuracy": 0.8814,
+          "precision": 0.8974,
+          "recall": 0.9211,
+          "f1": 0.9091
+        },
+        "client_3": {
+          "domain": "financial",
+          "loss": 0.3135,
+          "accuracy": 0.8889,
+          "precision": 0.8372,
+          "recall": 0.9,
+          "f1": 0.8675
+        },
+        "client_4": {
+          "domain": "ptsd",
+          "loss": 0.4256,
+          "accuracy": 0.8174,
+          "precision": 0.7848,
+          "recall": 0.9394,
+          "f1": 0.8552
+        },
+        "client_5": {
+          "domain": "social",
+          "loss": 0.4764,
+          "accuracy": 0.819,
+          "precision": 0.7581,
+          "recall": 0.8868,
+          "f1": 0.8174
+        }
+      },
+      "round_seconds": 30.77
+    },
+    {
+      "round": 5,
+      "aggregation_weights": {
+        "client_1": 0.1928,
+        "client_2": 0.1973,
+        "client_3": 0.2097,
+        "client_4": 0.207,
+        "client_5": 0.1933
+      },
+      "clients": [
+        {
+          "client_id": "client_1",
+          "domain": "abuse",
+          "num_train_samples": 435,
+          "local_train_loss": 0.406,
+          "local_val_accuracy": 0.7672,
+          "local_val_f1": 0.7874,
+          "train_seconds": 5.1
+        },
+        {
+          "client_id": "client_2",
+          "domain": "anxiety",
+          "num_train_samples": 445,
+          "local_train_loss": 0.3822,
+          "local_val_accuracy": 0.9068,
+          "local_val_f1": 0.929,
+          "train_seconds": 5.18
+        },
+        {
+          "client_id": "client_3",
+          "domain": "financial",
+          "num_train_samples": 473,
+          "local_train_loss": 0.361,
+          "local_val_accuracy": 0.8485,
+          "local_val_f1": 0.8352,
+          "train_seconds": 5.6
+        },
+        {
+          "client_id": "client_4",
+          "domain": "ptsd",
+          "num_train_samples": 467,
+          "local_train_loss": 0.406,
+          "local_val_accuracy": 0.8087,
+          "local_val_f1": 0.8514,
+          "train_seconds": 5.54
+        },
+        {
+          "client_id": "client_5",
+          "domain": "social",
+          "num_train_samples": 436,
+          "local_train_loss": 0.4684,
+          "local_val_accuracy": 0.819,
+          "local_val_f1": 0.7961,
+          "train_seconds": 5.12
+        }
+      ],
+      "global_val_metrics": {
+        "loss": 0.3833,
+        "accuracy": 0.8422,
+        "precision": 0.8127,
+        "recall": 0.9088,
+        "f1": 0.8581,
+        "confusion_matrix": [
+          [
+            206,
+            62
+          ],
+          [
+            27,
+            269
+          ]
+        ]
+      },
+      "global_model_on_clients_val": {
+        "client_1": {
+          "domain": "abuse",
+          "loss": 0.4578,
+          "accuracy": 0.7672,
+          "precision": 0.7429,
+          "recall": 0.8525,
+          "f1": 0.7939
+        },
+        "client_2": {
+          "domain": "anxiety",
+          "loss": 0.284,
+          "accuracy": 0.8983,
+          "precision": 0.9103,
+          "recall": 0.9342,
+          "f1": 0.9221
+        },
+        "client_3": {
+          "domain": "financial",
+          "loss": 0.3127,
+          "accuracy": 0.899,
+          "precision": 0.8409,
+          "recall": 0.925,
+          "f1": 0.881
+        },
+        "client_4": {
+          "domain": "ptsd",
+          "loss": 0.4026,
+          "accuracy": 0.8261,
+          "precision": 0.7875,
+          "recall": 0.9545,
+          "f1": 0.863
+        },
+        "client_5": {
+          "domain": "social",
+          "loss": 0.4511,
+          "accuracy": 0.8276,
+          "precision": 0.7797,
+          "recall": 0.8679,
+          "f1": 0.8214
+        }
+      },
+      "round_seconds": 31.22
+    }
+  ],
+  "final_global_val_metrics": {
+    "loss": 0.3833,
+    "accuracy": 0.8422,
+    "precision": 0.8127,
+    "recall": 0.9088,
+    "f1": 0.8581,
+    "confusion_matrix": [
+      [
+        206,
+        62
+      ],
+      [
+        27,
+        269
+      ]
+    ]
+  },
+  "final_global_test_metrics": {
+    "loss": 0.4416,
+    "accuracy": 0.7916,
+    "precision": 0.7644,
+    "recall": 0.8618,
+    "f1": 0.8102,
+    "confusion_matrix": [
+      [
+        248,
+        98
+      ],
+      [
+        51,
+        318
+      ]
+    ]
+  },
+  "per_client_test_metrics": {
+    "client_1": {
+      "domain": "abuse",
+      "num_samples": 142,
+      "loss": 0.4708,
+      "accuracy": 0.7606,
+      "precision": 0.734,
+      "recall": 0.8846,
+      "f1": 0.8023,
+      "confusion_matrix": [
+        [
+          39,
+          25
+        ],
+        [
+          9,
+          69
+        ]
+      ]
+    },
+    "client_2": {
+      "domain": "anxiety",
+      "num_samples": 161,
+      "loss": 0.3422,
+      "accuracy": 0.8261,
+      "precision": 0.8131,
+      "recall": 0.9158,
+      "f1": 0.8614,
+      "confusion_matrix": [
+        [
+          46,
+          20
+        ],
+        [
+          8,
+          87
+        ]
+      ]
+    },
+    "client_3": {
+      "domain": "financial",
+      "num_samples": 143,
+      "loss": 0.3615,
+      "accuracy": 0.8462,
+      "precision": 0.7857,
+      "recall": 0.8148,
+      "f1": 0.8,
+      "confusion_matrix": [
+        [
+          77,
+          12
+        ],
+        [
+          10,
+          44
+        ]
+      ]
+    },
+    "client_4": {
+      "domain": "ptsd",
+      "num_samples": 127,
+      "loss": 0.394,
+      "accuracy": 0.8031,
+      "precision": 0.8202,
+      "recall": 0.8902,
+      "f1": 0.8538,
+      "confusion_matrix": [
+        [
+          29,
+          16
+        ],
+        [
+          9,
+          73
+        ]
+      ]
+    },
+    "client_5": {
+      "domain": "social",
+      "num_samples": 142,
+      "loss": 0.6484,
+      "accuracy": 0.7183,
+      "precision": 0.6429,
+      "recall": 0.75,
+      "f1": 0.6923,
+      "confusion_matrix": [
+        [
+          57,
+          25
+        ],
+        [
+          15,
+          45
+        ]
+      ]
+    }
+  },
+  "mean_client_test_metrics": {
+    "accuracy": 0.7909,
+    "f1": 0.802
+  },
+  "saved_artifacts": {
+    "model_dir": "C:\\Users\\ASUS\\MentalHealthFL-MERN\\ai-service\\models\\federated_global_lora",
+    "val_predictions_csv": "C:\\Users\\ASUS\\MentalHealthFL-MERN\\ai-service\\experiments\\federated_global_val_predictions.csv",
+    "test_predictions_csv": "C:\\Users\\ASUS\\MentalHealthFL-MERN\\ai-service\\experiments\\federated_global_test_predictions.csv"
+  }
+}

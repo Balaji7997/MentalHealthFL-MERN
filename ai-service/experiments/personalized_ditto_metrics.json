@@ -1,0 +1,401 @@
+{
+  "experiment": "personalized_federated_learning_ditto_lora",
+  "method_name": "Ditto-LoRA (FedAvg Global Initialization + Proximal Regularized Local Adaptation)",
+  "citation": "Li, T., Hu, S., Beirami, A., & Smith, V. (2021). Ditto: Fair and Robust Federated Learning Through Personalization. ICML 2021.",
+  "dataset": "Dreaddit (5 Natural Non-IID Domain Clients)",
+  "base_model": "FacebookAI/roberta-base",
+  "device": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "total_runtime_seconds": 104.7,
+  "hyperparameters": {
+    "seed": 42,
+    "adapt_epochs": 3,
+    "adapt_lr": 5e-05,
+    "weight_decay": 0.01,
+    "proximal_mu": 0.1,
+    "batch_size": 16,
+    "max_length": 256,
+    "bfloat16": true
+  },
+  "adaptation_logs": {
+    "client_1": {
+      "best_adapt_epoch": 2,
+      "val_f1_global": 0.7939,
+      "val_f1_personalized": 0.8116,
+      "val_loss_global": 0.4578,
+      "val_loss_personalized": 0.5681,
+      "epoch_logs": [
+        {
+          "epoch": 0,
+          "train_loss": null,
+          "val_loss": 0.4578,
+          "val_accuracy": 0.7672,
+          "val_f1": 0.7939
+        },
+        {
+          "epoch": 1,
+          "train_loss": 0.3689,
+          "val_loss": 0.4787,
+          "val_accuracy": 0.7672,
+          "val_f1": 0.7805
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.3654,
+          "val_loss": 0.5681,
+          "val_accuracy": 0.7759,
+          "val_f1": 0.8116
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.344,
+          "val_loss": 0.4758,
+          "val_accuracy": 0.8017,
+          "val_f1": 0.8099
+        }
+      ]
+    },
+    "client_2": {
+      "best_adapt_epoch": 1,
+      "val_f1_global": 0.9221,
+      "val_f1_personalized": 0.9241,
+      "val_loss_global": 0.284,
+      "val_loss_personalized": 0.2961,
+      "epoch_logs": [
+        {
+          "epoch": 0,
+          "train_loss": null,
+          "val_loss": 0.284,
+          "val_accuracy": 0.8983,
+          "val_f1": 0.9221
+        },
+        {
+          "epoch": 1,
+          "train_loss": 0.2975,
+          "val_loss": 0.2961,
+          "val_accuracy": 0.8983,
+          "val_f1": 0.9241
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.2997,
+          "val_loss": 0.3234,
+          "val_accuracy": 0.8898,
+          "val_f1": 0.9193
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.2807,
+          "val_loss": 0.3033,
+          "val_accuracy": 0.8898,
+          "val_f1": 0.9182
+        }
+      ]
+    },
+    "client_3": {
+      "best_adapt_epoch": 2,
+      "val_f1_global": 0.881,
+      "val_f1_personalized": 0.8889,
+      "val_loss_global": 0.3127,
+      "val_loss_personalized": 0.2891,
+      "epoch_logs": [
+        {
+          "epoch": 0,
+          "train_loss": null,
+          "val_loss": 0.3127,
+          "val_accuracy": 0.899,
+          "val_f1": 0.881
+        },
+        {
+          "epoch": 1,
+          "train_loss": 0.3319,
+          "val_loss": 0.3026,
+          "val_accuracy": 0.9091,
+          "val_f1": 0.8889
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.2932,
+          "val_loss": 0.2891,
+          "val_accuracy": 0.9091,
+          "val_f1": 0.8889
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.2837,
+          "val_loss": 0.2794,
+          "val_accuracy": 0.899,
+          "val_f1": 0.8718
+        }
+      ]
+    },
+    "client_4": {
+      "best_adapt_epoch": 3,
+      "val_f1_global": 0.863,
+      "val_f1_personalized": 0.8841,
+      "val_loss_global": 0.4026,
+      "val_loss_personalized": 0.3755,
+      "epoch_logs": [
+        {
+          "epoch": 0,
+          "train_loss": null,
+          "val_loss": 0.4026,
+          "val_accuracy": 0.8261,
+          "val_f1": 0.863
+        },
+        {
+          "epoch": 1,
+          "train_loss": 0.3598,
+          "val_loss": 0.3903,
+          "val_accuracy": 0.8435,
+          "val_f1": 0.8732
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.3376,
+          "val_loss": 0.3743,
+          "val_accuracy": 0.8522,
+          "val_f1": 0.8741
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.3309,
+          "val_loss": 0.3755,
+          "val_accuracy": 0.8609,
+          "val_f1": 0.8841
+        }
+      ]
+    },
+    "client_5": {
+      "best_adapt_epoch": 0,
+      "val_f1_global": 0.8214,
+      "val_f1_personalized": 0.8214,
+      "val_loss_global": 0.4511,
+      "val_loss_personalized": 0.4511,
+      "epoch_logs": [
+        {
+          "epoch": 0,
+          "train_loss": null,
+          "val_loss": 0.4511,
+          "val_accuracy": 0.8276,
+          "val_f1": 0.8214
+        },
+        {
+          "epoch": 1,
+          "train_loss": 0.4344,
+          "val_loss": 0.4587,
+          "val_accuracy": 0.8017,
+          "val_f1": 0.8067
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.415,
+          "val_loss": 0.414,
+          "val_accuracy": 0.8103,
+          "val_f1": 0.7925
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.3798,
+          "val_loss": 0.4575,
+          "val_accuracy": 0.819,
+          "val_f1": 0.8174
+        }
+      ]
+    }
+  },
+  "overall_personalized_test_metrics": {
+    "num_samples": 715,
+    "accuracy": 0.7958,
+    "precision": 0.7648,
+    "recall": 0.8726,
+    "f1": 0.8152,
+    "confusion_matrix": [
+      [
+        247,
+        99
+      ],
+      [
+        47,
+        322
+      ]
+    ]
+  },
+  "mean_client_test_metrics": {
+    "accuracy": 0.7951,
+    "f1": 0.8041
+  },
+  "per_client_test_metrics": {
+    "client_1": {
+      "domain": "abuse",
+      "num_samples": 142,
+      "loss": 0.5847,
+      "accuracy": 0.7817,
+      "precision": 0.7238,
+      "recall": 0.9744,
+      "f1": 0.8306,
+      "confusion_matrix": [
+        [
+          35,
+          29
+        ],
+        [
+          2,
+          76
+        ]
+      ],
+      "best_adapt_epoch": 2,
+      "model_dir": "C:\\Users\\ASUS\\MentalHealthFL-MERN\\ai-service\\models\\personalized_ditto_lora\\client_1"
+    },
+    "client_2": {
+      "domain": "anxiety",
+      "num_samples": 161,
+      "loss": 0.3836,
+      "accuracy": 0.8323,
+      "precision": 0.8148,
+      "recall": 0.9263,
+      "f1": 0.867,
+      "confusion_matrix": [
+        [
+          46,
+          20
+        ],
+        [
+          7,
+          88
+        ]
+      ],
+      "best_adapt_epoch": 1,
+      "model_dir": "C:\\Users\\ASUS\\MentalHealthFL-MERN\\ai-service\\models\\personalized_ditto_lora\\client_2"
+    },
+    "client_3": {
+      "domain": "financial",
+      "num_samples": 143,
+      "loss": 0.3655,
+      "accuracy": 0.8322,
+      "precision": 0.7885,
+      "recall": 0.7593,
+      "f1": 0.7736,
+      "confusion_matrix": [
+        [
+          78,
+          11
+        ],
+        [
+          13,
+          41
+        ]
+      ],
+      "best_adapt_epoch": 2,
+      "model_dir": "C:\\Users\\ASUS\\MentalHealthFL-MERN\\ai-service\\models\\personalized_ditto_lora\\client_3"
+    },
+    "client_4": {
+      "domain": "ptsd",
+      "num_samples": 127,
+      "loss": 0.3873,
+      "accuracy": 0.811,
+      "precision": 0.8372,
+      "recall": 0.878,
+      "f1": 0.8571,
+      "confusion_matrix": [
+        [
+          31,
+          14
+        ],
+        [
+          10,
+          72
+        ]
+      ],
+      "best_adapt_epoch": 3,
+      "model_dir": "C:\\Users\\ASUS\\MentalHealthFL-MERN\\ai-service\\models\\personalized_ditto_lora\\client_4"
+    },
+    "client_5": {
+      "domain": "social",
+      "num_samples": 142,
+      "loss": 0.6484,
+      "accuracy": 0.7183,
+      "precision": 0.6429,
+      "recall": 0.75,
+      "f1": 0.6923,
+      "confusion_matrix": [
+        [
+          57,
+          25
+        ],
+        [
+          15,
+          45
+        ]
+      ],
+      "best_adapt_epoch": 0,
+      "model_dir": "C:\\Users\\ASUS\\MentalHealthFL-MERN\\ai-service\\models\\personalized_ditto_lora\\client_5"
+    }
+  },
+  "comparison_vs_fedavg_global": [
+    {
+      "client_id": "client_1",
+      "domain": "abuse",
+      "test_samples": 142,
+      "best_adapt_epoch": 2,
+      "fedavg_global_accuracy": 0.7606,
+      "ditto_personalized_accuracy": 0.7817,
+      "accuracy_delta": 0.0211,
+      "fedavg_global_f1": 0.8023,
+      "ditto_personalized_f1": 0.8306,
+      "f1_delta": 0.0283
+    },
+    {
+      "client_id": "client_2",
+      "domain": "anxiety",
+      "test_samples": 161,
+      "best_adapt_epoch": 1,
+      "fedavg_global_accuracy": 0.8261,
+      "ditto_personalized_accuracy": 0.8323,
+      "accuracy_delta": 0.0062,
+      "fedavg_global_f1": 0.8614,
+      "ditto_personalized_f1": 0.867,
+      "f1_delta": 0.0056
+    },
+    {
+      "client_id": "client_3",
+      "domain": "financial",
+      "test_samples": 143,
+      "best_adapt_epoch": 2,
+      "fedavg_global_accuracy": 0.8462,
+      "ditto_personalized_accuracy": 0.8322,
+      "accuracy_delta": -0.014,
+      "fedavg_global_f1": 0.8,
+      "ditto_personalized_f1": 0.7736,
+      "f1_delta": -0.0264
+    },
+    {
+      "client_id": "client_4",
+      "domain": "ptsd",
+      "test_samples": 127,
+      "best_adapt_epoch": 3,
+      "fedavg_global_accuracy": 0.8031,
+      "ditto_personalized_accuracy": 0.811,
+      "accuracy_delta": 0.0079,
+      "fedavg_global_f1": 0.8538,
+      "ditto_personalized_f1": 0.8571,
+      "f1_delta": 0.0033
+    },
+    {
+      "client_id": "client_5",
+      "domain": "social",
+      "test_samples": 142,
+      "best_adapt_epoch": 0,
+      "fedavg_global_accuracy": 0.7183,
+      "ditto_personalized_accuracy": 0.7183,
+      "accuracy_delta": 0.0,
+      "fedavg_global_f1": 0.6923,
+      "ditto_personalized_f1": 0.6923,
+      "f1_delta": 0.0
+    }
+  ],
+  "saved_artifacts": {
+    "models_root_dir": "C:\\Users\\ASUS\\MentalHealthFL-MERN\\ai-service\\models\\personalized_ditto_lora",
+    "val_predictions_csv": "C:\\Users\\ASUS\\MentalHealthFL-MERN\\ai-service\\experiments\\personalized_ditto_val_predictions.csv",
+    "test_predictions_csv": "C:\\Users\\ASUS\\MentalHealthFL-MERN\\ai-service\\experiments\\personalized_ditto_test_predictions.csv"
+  }
+}

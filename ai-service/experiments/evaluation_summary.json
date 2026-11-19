@@ -1,0 +1,376 @@
+{
+  "project_title": "Reliability-Aware Personalized Federated Learning for Mental Health Stress Detection",
+  "dataset": {
+    "name": "Dreaddit",
+    "source": "Hugging Face Hub (andreagasparini/dreaddit)",
+    "citation": "Turcan, E., & McKeown, K. (2019). Dreaddit: A Reddit Dataset for Stress Analysis in Social Media. Proceedings of the Tenth International Workshop on Health Text Mining and Information Analysis (LOUHI 2019), ACL.",
+    "train_rows": 2256,
+    "validation_rows": 564,
+    "test_rows": 715,
+    "num_clients": 5,
+    "non_iid_stress_spread": {
+      "min": 0.3953,
+      "max": 0.6494,
+      "spread": 0.2541
+    }
+  },
+  "base_architecture": {
+    "base_model": "FacebookAI/roberta-base",
+    "total_parameters": 125681668,
+    "trainable_parameters": 1034498,
+    "trainable_percentage": 0.8231,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_target_modules": [
+      "query",
+      "key",
+      "value"
+    ]
+  },
+  "model_comparison": [
+    {
+      "model_key": "centralized_lora",
+      "name": "Centralized RoBERTa + LoRA",
+      "paradigm": "Centralized (Upper Bound)",
+      "data_centralized": true,
+      "upload_mb_per_client_round": null,
+      "accuracy": 0.814,
+      "precision": 0.7878,
+      "recall": 0.8753,
+      "f1": 0.8293,
+      "confusion_matrix": [
+        [
+          259,
+          87
+        ],
+        [
+          46,
+          323
+        ]
+      ],
+      "optimal_temperature": 1.5958,
+      "uncalibrated_ece": 0.0842,
+      "calibrated_ece": 0.0266,
+      "uncalibrated_brier": 0.1401,
+      "calibrated_brier": 0.1327,
+      "calibrated_nll": 0.4104,
+      "default_policy_coverage": 0.7119,
+      "default_policy_auto_acc": 0.9018
+    },
+    {
+      "model_key": "federated_global",
+      "name": "FedAvg Global RoBERTa + LoRA",
+      "paradigm": "Federated Learning (Global)",
+      "data_centralized": false,
+      "upload_mb_per_client_round": 3.9463,
+      "accuracy": 0.7916,
+      "precision": 0.7644,
+      "recall": 0.8618,
+      "f1": 0.8102,
+      "confusion_matrix": [
+        [
+          248,
+          98
+        ],
+        [
+          51,
+          318
+        ]
+      ],
+      "optimal_temperature": 1.2148,
+      "uncalibrated_ece": 0.0494,
+      "calibrated_ece": 0.0305,
+      "uncalibrated_brier": 0.141,
+      "calibrated_brier": 0.1391,
+      "calibrated_nll": 0.4308,
+      "default_policy_coverage": 0.6769,
+      "default_policy_auto_acc": 0.8884
+    },
+    {
+      "model_key": "personalized_fedper",
+      "name": "FedPer-LoRA (Private Heads)",
+      "paradigm": "Personalized FL (Architectural)",
+      "data_centralized": false,
+      "upload_mb_per_client_round": 1.6875,
+      "accuracy": 0.7818,
+      "precision": 0.746,
+      "recall": 0.8753,
+      "f1": 0.8055,
+      "confusion_matrix": [
+        [
+          236,
+          110
+        ],
+        [
+          46,
+          323
+        ]
+      ],
+      "optimal_temperature": 1.3001,
+      "uncalibrated_ece": 0.079,
+      "calibrated_ece": 0.0424,
+      "uncalibrated_brier": 0.1517,
+      "calibrated_brier": 0.1463,
+      "calibrated_nll": 0.4455,
+      "default_policy_coverage": 0.7063,
+      "default_policy_auto_acc": 0.8693
+    },
+    {
+      "model_key": "personalized_ditto",
+      "name": "Ditto-LoRA (Proximal Personalization)",
+      "paradigm": "Personalized FL (Regularized)",
+      "data_centralized": false,
+      "upload_mb_per_client_round": 3.9463,
+      "accuracy": 0.7958,
+      "precision": 0.7648,
+      "recall": 0.8726,
+      "f1": 0.8152,
+      "confusion_matrix": [
+        [
+          247,
+          99
+        ],
+        [
+          47,
+          322
+        ]
+      ],
+      "optimal_temperature": 1.4883,
+      "uncalibrated_ece": 0.0838,
+      "calibrated_ece": 0.0258,
+      "uncalibrated_brier": 0.1476,
+      "calibrated_brier": 0.1407,
+      "calibrated_nll": 0.4312,
+      "default_policy_coverage": 0.6965,
+      "default_policy_auto_acc": 0.8755
+    }
+  ],
+  "client_comparison": [
+    {
+      "client_id": "client_1",
+      "domain": "abuse",
+      "display_name": "Abuse & Domestic Violence Community",
+      "subreddits": [
+        "domesticviolence",
+        "survivorsofabuse"
+      ],
+      "train_samples": 435,
+      "train_stress_ratio": 0.577,
+      "test_samples": 142,
+      "fedavg_accuracy": 0.7606,
+      "fedavg_f1": 0.8023,
+      "fedper_accuracy": 0.7183,
+      "fedper_f1": 0.7938,
+      "ditto_accuracy": 0.7817,
+      "ditto_f1": 0.8306,
+      "ditto_vs_fedavg_acc_delta": 0.0211,
+      "ditto_vs_fedavg_f1_delta": 0.0283,
+      "ditto_calibrated_ece": 0.084,
+      "ditto_calibrated_brier": 0.1672,
+      "ditto_human_review_rate": 0.2958
+    },
+    {
+      "client_id": "client_2",
+      "domain": "anxiety",
+      "display_name": "Anxiety & General Stress Community",
+      "subreddits": [
+        "anxiety",
+        "stress"
+      ],
+      "train_samples": 445,
+      "train_stress_ratio": 0.6494,
+      "test_samples": 161,
+      "fedavg_accuracy": 0.8261,
+      "fedavg_f1": 0.8614,
+      "fedper_accuracy": 0.8509,
+      "fedper_f1": 0.8776,
+      "ditto_accuracy": 0.8323,
+      "ditto_f1": 0.867,
+      "ditto_vs_fedavg_acc_delta": 0.0062,
+      "ditto_vs_fedavg_f1_delta": 0.0056,
+      "ditto_calibrated_ece": 0.0251,
+      "ditto_calibrated_brier": 0.1144,
+      "ditto_human_review_rate": 0.2733
+    },
+    {
+      "client_id": "client_3",
+      "domain": "financial",
+      "display_name": "Financial & Housing Distress Community",
+      "subreddits": [
+        "almosthomeless",
+        "assistance",
+        "food_pantry",
+        "homeless"
+      ],
+      "train_samples": 473,
+      "train_stress_ratio": 0.3953,
+      "test_samples": 143,
+      "fedavg_accuracy": 0.8462,
+      "fedavg_f1": 0.8,
+      "fedper_accuracy": 0.8252,
+      "fedper_f1": 0.7706,
+      "ditto_accuracy": 0.8322,
+      "ditto_f1": 0.7736,
+      "ditto_vs_fedavg_acc_delta": -0.014,
+      "ditto_vs_fedavg_f1_delta": -0.0264,
+      "ditto_calibrated_ece": 0.0379,
+      "ditto_calibrated_brier": 0.1132,
+      "ditto_human_review_rate": 0.2587
+    },
+    {
+      "client_id": "client_4",
+      "domain": "ptsd",
+      "display_name": "PTSD & Trauma Support Community",
+      "subreddits": [
+        "ptsd"
+      ],
+      "train_samples": 467,
+      "train_stress_ratio": 0.5675,
+      "test_samples": 127,
+      "fedavg_accuracy": 0.8031,
+      "fedavg_f1": 0.8538,
+      "fedper_accuracy": 0.8189,
+      "fedper_f1": 0.8655,
+      "ditto_accuracy": 0.811,
+      "ditto_f1": 0.8571,
+      "ditto_vs_fedavg_acc_delta": 0.0079,
+      "ditto_vs_fedavg_f1_delta": 0.0033,
+      "ditto_calibrated_ece": 0.0543,
+      "ditto_calibrated_brier": 0.1188,
+      "ditto_human_review_rate": 0.2441
+    },
+    {
+      "client_id": "client_5",
+      "domain": "social",
+      "display_name": "Social & Relationships Community",
+      "subreddits": [
+        "relationships"
+      ],
+      "train_samples": 436,
+      "train_stress_ratio": 0.445,
+      "test_samples": 142,
+      "fedavg_accuracy": 0.7183,
+      "fedavg_f1": 0.6923,
+      "fedper_accuracy": 0.6901,
+      "fedper_f1": 0.6667,
+      "ditto_accuracy": 0.7183,
+      "ditto_f1": 0.6923,
+      "ditto_vs_fedavg_acc_delta": 0.0,
+      "ditto_vs_fedavg_f1_delta": 0.0,
+      "ditto_calibrated_ece": 0.0598,
+      "ditto_calibrated_brier": 0.1913,
+      "ditto_human_review_rate": 0.4437
+    }
+  ],
+  "human_review_policy": {
+    "recommended_model": "personalized_ditto",
+    "default_confidence_threshold": 0.75,
+    "optimal_temperature": 1.4883,
+    "default_operating_point": {
+      "confidence_threshold": 0.75,
+      "automated_count": 498,
+      "human_review_count": 217,
+      "coverage": 0.6965,
+      "human_review_rate": 0.3035,
+      "automated_accuracy": 0.8755,
+      "automated_error_rate": 0.1245,
+      "flagged_subset_error_rate": 0.3871
+    },
+    "tradeoff_curve": [
+      {
+        "confidence_threshold": 0.5,
+        "automated_count": 715,
+        "human_review_count": 0,
+        "coverage": 1.0,
+        "human_review_rate": 0.0,
+        "automated_accuracy": 0.7958,
+        "automated_error_rate": 0.2042,
+        "flagged_subset_error_rate": 0.0
+      },
+      {
+        "confidence_threshold": 0.6,
+        "automated_count": 631,
+        "human_review_count": 84,
+        "coverage": 0.8825,
+        "human_review_rate": 0.1175,
+        "automated_accuracy": 0.8336,
+        "automated_error_rate": 0.1664,
+        "flagged_subset_error_rate": 0.4881
+      },
+      {
+        "confidence_threshold": 0.65,
+        "automated_count": 600,
+        "human_review_count": 115,
+        "coverage": 0.8392,
+        "human_review_rate": 0.1608,
+        "automated_accuracy": 0.84,
+        "automated_error_rate": 0.16,
+        "flagged_subset_error_rate": 0.4348
+      },
+      {
+        "confidence_threshold": 0.7,
+        "automated_count": 547,
+        "human_review_count": 168,
+        "coverage": 0.765,
+        "human_review_rate": 0.235,
+        "automated_accuracy": 0.8611,
+        "automated_error_rate": 0.1389,
+        "flagged_subset_error_rate": 0.4167
+      },
+      {
+        "confidence_threshold": 0.75,
+        "automated_count": 498,
+        "human_review_count": 217,
+        "coverage": 0.6965,
+        "human_review_rate": 0.3035,
+        "automated_accuracy": 0.8755,
+        "automated_error_rate": 0.1245,
+        "flagged_subset_error_rate": 0.3871
+      },
+      {
+        "confidence_threshold": 0.8,
+        "automated_count": 432,
+        "human_review_count": 283,
+        "coverage": 0.6042,
+        "human_review_rate": 0.3958,
+        "automated_accuracy": 0.8912,
+        "automated_error_rate": 0.1088,
+        "flagged_subset_error_rate": 0.3498
+      },
+      {
+        "confidence_threshold": 0.85,
+        "automated_count": 376,
+        "human_review_count": 339,
+        "coverage": 0.5259,
+        "human_review_rate": 0.4741,
+        "automated_accuracy": 0.9176,
+        "automated_error_rate": 0.0824,
+        "flagged_subset_error_rate": 0.3392
+      },
+      {
+        "confidence_threshold": 0.9,
+        "automated_count": 288,
+        "human_review_count": 427,
+        "coverage": 0.4028,
+        "human_review_rate": 0.5972,
+        "automated_accuracy": 0.9444,
+        "automated_error_rate": 0.0556,
+        "flagged_subset_error_rate": 0.3044
+      },
+      {
+        "confidence_threshold": 0.95,
+        "automated_count": 179,
+        "human_review_count": 536,
+        "coverage": 0.2503,
+        "human_review_rate": 0.7497,
+        "automated_accuracy": 0.9721,
+        "automated_error_rate": 0.0279,
+        "flagged_subset_error_rate": 0.2631
+      }
+    ]
+  },
+  "privacy_and_scope_notes": [
+    "Federated learning avoids pooling raw client text centrally, but weight updates alone do not guarantee absolute privacy without additional defenses (e.g., differential privacy or secure aggregation).",
+    "This system is a research prototype for text-based stress indication with uncertainty flagging; it is not a clinical or medical diagnostic tool."
+  ]
+}

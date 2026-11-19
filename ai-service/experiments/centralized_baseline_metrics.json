@@ -1,0 +1,166 @@
+{
+  "experiment": "centralized_roberta_lora_baseline",
+  "dataset": "Dreaddit",
+  "base_model": "FacebookAI/roberta-base",
+  "device": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "total_runtime_seconds": 333.71,
+  "hyperparameters": {
+    "seed": 42,
+    "max_length": 256,
+    "batch_size": 16,
+    "epochs": 4,
+    "learning_rate": 0.0002,
+    "weight_decay": 0.01,
+    "warmup_ratio": 0.1,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.1,
+    "lora_target_modules": [
+      "query",
+      "key",
+      "value"
+    ],
+    "bfloat16": true
+  },
+  "parameters": {
+    "trainable_parameters": 1034498,
+    "total_parameters": 125681668,
+    "trainable_percentage": 0.8231
+  },
+  "best_epoch": 4,
+  "epoch_history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.5734,
+      "val_loss": 0.3687,
+      "val_accuracy": 0.8298,
+      "val_precision": 0.8268,
+      "val_recall": 0.8547,
+      "val_f1": 0.8405,
+      "epoch_seconds": 120.71
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.3722,
+      "val_loss": 0.3667,
+      "val_accuracy": 0.8298,
+      "val_precision": 0.8906,
+      "val_recall": 0.7703,
+      "val_f1": 0.8261,
+      "epoch_seconds": 116.98
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.339,
+      "val_loss": 0.3576,
+      "val_accuracy": 0.8511,
+      "val_precision": 0.851,
+      "val_recall": 0.8682,
+      "val_f1": 0.8595,
+      "epoch_seconds": 58.17
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.296,
+      "val_loss": 0.3794,
+      "val_accuracy": 0.8582,
+      "val_precision": 0.8333,
+      "val_recall": 0.9122,
+      "val_f1": 0.871,
+      "epoch_seconds": 25.75
+    }
+  ],
+  "validation_metrics": {
+    "loss": 0.3794,
+    "accuracy": 0.8582,
+    "precision": 0.8333,
+    "recall": 0.9122,
+    "f1": 0.871,
+    "confusion_matrix": [
+      [
+        214,
+        54
+      ],
+      [
+        26,
+        270
+      ]
+    ],
+    "classification_report": {
+      "Non-Stress": {
+        "precision": 0.8916666666666667,
+        "recall": 0.7985074626865671,
+        "f1-score": 0.84251968503937,
+        "support": 268.0
+      },
+      "Stress": {
+        "precision": 0.8333333333333334,
+        "recall": 0.9121621621621622,
+        "f1-score": 0.8709677419354839,
+        "support": 296.0
+      },
+      "accuracy": 0.8581560283687943,
+      "macro avg": {
+        "precision": 0.8625,
+        "recall": 0.8553348124243647,
+        "f1-score": 0.856743713487427,
+        "support": 564.0
+      },
+      "weighted avg": {
+        "precision": 0.8610520094562648,
+        "recall": 0.8581560283687943,
+        "f1-score": 0.8574498709281106,
+        "support": 564.0
+      }
+    }
+  },
+  "test_metrics": {
+    "loss": 0.4635,
+    "accuracy": 0.814,
+    "precision": 0.7878,
+    "recall": 0.8753,
+    "f1": 0.8293,
+    "confusion_matrix": [
+      [
+        259,
+        87
+      ],
+      [
+        46,
+        323
+      ]
+    ],
+    "classification_report": {
+      "Non-Stress": {
+        "precision": 0.8491803278688524,
+        "recall": 0.7485549132947977,
+        "f1-score": 0.7956989247311828,
+        "support": 346.0
+      },
+      "Stress": {
+        "precision": 0.7878048780487805,
+        "recall": 0.8753387533875339,
+        "f1-score": 0.8292682926829268,
+        "support": 369.0
+      },
+      "accuracy": 0.813986013986014,
+      "macro avg": {
+        "precision": 0.8184926029588164,
+        "recall": 0.8119468333411658,
+        "f1-score": 0.8124836087070548,
+        "support": 715.0
+      },
+      "weighted avg": {
+        "precision": 0.8175054453742979,
+        "recall": 0.813986013986014,
+        "f1-score": 0.8130235356041807,
+        "support": 715.0
+      }
+    }
+  },
+  "saved_artifacts": {
+    "model_dir": "C:\\Users\\ASUS\\MentalHealthFL-MERN\\ai-service\\models\\centralized_lora",
+    "val_predictions_csv": "C:\\Users\\ASUS\\MentalHealthFL-MERN\\ai-service\\experiments\\centralized_val_predictions.csv",
+    "test_predictions_csv": "C:\\Users\\ASUS\\MentalHealthFL-MERN\\ai-service\\experiments\\centralized_test_predictions.csv"
+  }
+}

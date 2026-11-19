@@ -1,0 +1,119 @@
+{
+  "dataset_name": "Dreaddit",
+  "source": "Hugging Face Hub (andreagasparini/dreaddit)",
+  "citation": "Turcan, E., & McKeown, K. (2019). Dreaddit: A Reddit Dataset for Stress Analysis in Social Media. Proceedings of the Tenth International Workshop on Health Text Mining and Information Analysis (LOUHI 2019), ACL.",
+  "task": "Binary Stress Detection",
+  "label_mapping": {
+    "0": "Non-Stress",
+    "1": "Stress"
+  },
+  "random_seed": 42,
+  "split_method": "StratifiedGroupKFold (5-fold, grouped by post_id) on official train; official test preserved untouched",
+  "train_val_post_id_overlap": 0,
+  "train_pool_test_exact_text_overlap": 3,
+  "cleaning_log": {
+    "raw_train_pool": {
+      "initial_rows": 2838,
+      "removed_empty_text": 0,
+      "removed_invalid_labels": 0,
+      "removed_exact_duplicates": 18,
+      "final_rows": 2820
+    },
+    "raw_test": {
+      "initial_rows": 715,
+      "removed_empty_text": 0,
+      "removed_invalid_labels": 0,
+      "removed_exact_duplicates": 0,
+      "final_rows": 715
+    }
+  },
+  "splits": {
+    "train": {
+      "rows": 2256,
+      "unique_posts": 1863,
+      "non_stress_count": 1070,
+      "stress_count": 1186,
+      "stress_ratio": 0.5257,
+      "avg_word_count": 86.41,
+      "min_word_count": 1,
+      "max_word_count": 292,
+      "domain_counts": {
+        "abuse": 435,
+        "anxiety": 445,
+        "financial": 473,
+        "ptsd": 467,
+        "social": 436
+      },
+      "subreddit_counts": {
+        "almosthomeless": 63,
+        "anxiety": 400,
+        "assistance": 240,
+        "domesticviolence": 250,
+        "food_pantry": 31,
+        "homeless": 139,
+        "ptsd": 467,
+        "relationships": 436,
+        "stress": 45,
+        "survivorsofabuse": 185
+      }
+    },
+    "validation": {
+      "rows": 564,
+      "unique_posts": 468,
+      "non_stress_count": 268,
+      "stress_count": 296,
+      "stress_ratio": 0.5248,
+      "avg_word_count": 82.94,
+      "min_word_count": 17,
+      "max_word_count": 310,
+      "domain_counts": {
+        "abuse": 116,
+        "anxiety": 118,
+        "financial": 99,
+        "ptsd": 115,
+        "social": 116
+      },
+      "subreddit_counts": {
+        "almosthomeless": 15,
+        "anxiety": 102,
+        "assistance": 49,
+        "domesticviolence": 65,
+        "food_pantry": 6,
+        "homeless": 29,
+        "ptsd": 115,
+        "relationships": 116,
+        "stress": 16,
+        "survivorsofabuse": 51
+      }
+    },
+    "test": {
+      "rows": 715,
+      "unique_posts": 586,
+      "non_stress_count": 346,
+      "stress_count": 369,
+      "stress_ratio": 0.5161,
+      "avg_word_count": 85.45,
+      "min_word_count": 12,
+      "max_word_count": 268,
+      "domain_counts": {
+        "abuse": 142,
+        "anxiety": 161,
+        "financial": 143,
+        "ptsd": 127,
+        "social": 142
+      },
+      "subreddit_counts": {
+        "almosthomeless": 19,
+        "anxiety": 147,
+        "assistance": 66,
+        "domesticviolence": 72,
+        "food_pantry": 6,
+        "homeless": 52,
+        "ptsd": 127,
+        "relationships": 142,
+        "stress": 14,
+        "survivorsofabuse": 70
+      }
+    }
+  }
+}

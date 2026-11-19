@@ -1,0 +1,21 @@
+# Node / React / Express dependencies & builds
+node_modules/
+backend/node_modules/
+dist/
+dist-ssr/
+*.local
+npm-debug.log*
+
+# Python virtual environment & caches (CRITICAL: prevents uploading multi-GB PyTorch/CUDA)
+ai-service/venv/
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Environment secrets & OS files
+.env
+.env.*
+.DS_Store
+Thumbs.db
