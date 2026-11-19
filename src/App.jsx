@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { fetchHealth, fetchOverview, fmt, pct } from "./api";
+import {
+  clearToken,
+  fetchCurrentUser,
+  fetchHealth,
+  fetchOverview,
+  fmt,
+  getToken,
+  pct,
+} from "./api";
+import AuthPage from "./components/AuthPage";
 import {
   AggregationView,
   FLArchitectureView,
@@ -76,8 +85,8 @@ function OverviewView({ overview, health, error, onNavigate }) {
         <div className="project-tag">
           <span className={`status-dot ${health?.ai_service_connected ? "" : "offline"}`}></span>
           {health?.ai_service_connected
-            ? `Live AI Engine (${health.ai_service?.device?.toUpperCase() || "GPU"} • ${health.ai_service?.loaded_adapters?.length || 7} Adapters)`
-            : "Waiting for Backend (5000) & FastAPI (8000)"}
+            ? `Live AI Engine (${health.ai_service?.device?.toUpperCase() || "CPU/GPU"} • ${health.ai_service?.loaded_adapters?.length || 7} Adapters)`
+            : "Waiting for Backend & AI Service"}
         </div>
       </div>
 
@@ -85,7 +94,7 @@ function OverviewView({ overview, health, error, onNavigate }) {
         <div className="notice danger" style={{ marginTop: 0, marginBottom: "18px" }}>
           <strong>Backend Not Reachable</strong>
           <p>
-            {error}. Ensure CMD Window 1 (FastAPI on port 8000) and CMD Window 2 (Express on port 5000) are running.
+            {error}. Ensure the Express Backend and FastAPI AI Service are running.
           </p>
         </div>
       )}
@@ -176,8 +185,8 @@ function OverviewView({ overview, health, error, onNavigate }) {
         <strong>Live Experimental Data & Research Disclaimer</strong>
         <p>
           All metrics across this dashboard are loaded live from verified Dreaddit experimental artifacts
-          through Express (port 5000) and FastAPI (port 8000). This platform is a research prototype for
-          text-based stress indication and uncertainty flagging—not a medical diagnostic system.
+          through Express and FastAPI. This platform is a research prototype for text-based stress
+          indication and uncertainty flagging—not a medical diagnostic system.
         </p>
       </div>
     </>
@@ -185,12 +194,32 @@ function OverviewView({ overview, health, error, onNavigate }) {
 }
 
 function App() {
+  const [user, setUser] = useState(null);
+  const [checkingAuth, setCheckingAuth] = useState(true);
   const [active, setActive] = useState("Overview");
   const [overview, setOverview] = useState(null);
   const [health, setHealth] = useState(null);
   const [overviewError, setOverviewError] = useState("");
 
+  // Restore existing login session on page load
   useEffect(() => {
+    const token = getToken();
+    if (!token) {
+      setCheckingAuth(false);
+      return;
+    }
+    fetchCurrentUser()
+      .then((res) => setUser(res.user))
+      .catch(() => {
+        clearToken();
+        setUser(null);
+      })
+      .finally(() => setCheckingAuth(false));
+  }, []);
+
+  // Load dashboard overview & health once signed in
+  useEffect(() => {
+    if (!user) return;
     Promise.all([fetchOverview(), fetchHealth()])
       .then(([ov, hl]) => {
         setOverview(ov);
@@ -200,7 +229,28 @@ function App() {
       .catch((err) => {
         setOverviewError(err.message || "Failed to connect to backend API.");
       });
-  }, []);
+  }, [user]);
+
+  function handleLogout() {
+    clearToken();
+    setUser(null);
+    setOverview(null);
+    setActive("Overview");
+  }
+
+  if (checkingAuth) {
+    return (
+      <div className="auth-shell">
+        <div className="loading-box">Checking session...</div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <AuthPage onAuthSuccess={(loggedInUser) => setUser(loggedInUser)} />;
+  }
+
+  const userInitial = (user.name || user.email || "U").trim().charAt(0).toUpperCase();
 
   function renderPage() {
     switch (active) {
@@ -281,8 +331,12 @@ function App() {
             <span className="current-page"> {active}</span>
           </div>
           <div className="top-right">
-            <span className="privacy-label">🔒 Privacy-aware research • Raw text never stored</span>
-            <div className="avatar">R</div>
+            <span className="privacy-label">🔒 Privacy-aware • Raw text never stored</span>
+            <span className="user-pill">{user.name}</span>
+            <div className="avatar" title={user.email}>{userInitial}</div>
+            <button type="button" className="logout-btn" onClick={handleLogout}>
+              Sign Out
+            </button>
           </div>
         </header>
 
